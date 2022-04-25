@@ -41,7 +41,7 @@ for path in os.listdir('E:/data/xingshibeijing/HC/1-FRFT-0'):
                     adjacency_matrix[i][j] = len(set(list[i].index).intersection(set(list[j].index)))
         
         #if   else用于将邻接矩阵拼接成(9，1728)的语句
-        #作者：孙浩   2019.11.21
+
         
         if jj == 1:
             jiaankangpinjie_matrix = adjacency_matrix
@@ -91,7 +91,7 @@ for path in os.listdir('E:/data/xingshibeijing/PD/1-FRFT-0'):
                     adjacency_matrix[i][j] = len(set(list[i].index).intersection(set(list[j].index)))
         
        # if   else用于将邻接矩阵拼接成(9，1728)的语句
-        #作者：孙浩   2019.11.21
+
        
         if jj == 1:
             youbingpinjie_matrix = adjacency_matrix
@@ -143,7 +143,7 @@ for path in os.listdir('E:/data/xingshibeijing/PD/1-FRFT-0'):
 #                     adjacency_matrix[i][j] = len(set(list[i].index).intersection(set(list[j].index)))
 #         '''
 #         if   else用于将邻接矩阵拼接成(9，1728)的语句
-#         作者：孙浩   2019.11.21
+
 #         '''
 #         if jj == 1:
 #             testpinjie_matrix = adjacency_matrix
