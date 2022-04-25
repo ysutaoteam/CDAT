@@ -169,7 +169,7 @@ class Hog_descriptor():
                 d2.update(d1)   #每一个像素点为为一个字典d1，将d1给d2，每次在d2后面更新d1
                 '''
                 将数据写入到表格中，形成形式背景，这样的话，上面的字典可能不需要了，只需要kk   min_angle  max_angle。
-                作者：孙浩  2019.11.21
+                
                 '''
                 # worksheet.write(kk+(65*(m-1)),0,kk)
                 # worksheet.write(kk+(65*(m-1)),min_angle+1,'1')
@@ -194,10 +194,7 @@ class Hog_descriptor():
     def get_closest_bins(self, gradient_angle):
         '''
         计算梯度方向gradient_angle位于哪一个bin中，这里采用的计算方式为双线性插值
-        具体参考：https://www.leiphone.com/news/201708/ZKsGd2JRKr766wEd.html
-        例如：当我们把180°划分为9个bin的时候，分别对应对应0,20,40,...160这些角度。
-              角度是10，副值是4，因为角度10介于0-20度的中间(正好一半)，所以把幅值
-              一分为二地放到0和20两个bin里面去。
+
         args:
             gradient_angle:角度
         return：
