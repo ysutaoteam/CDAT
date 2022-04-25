@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-# 代码来源GitHub:https://github.com/PENGZhaoqing/Hog-feature
-# https://blog.csdn.net/ppp8300885/article/details/71078555
-# https://www.leiphone.com/news/201708/ZKsGd2JRKr766wEd.html
 import os
 import cv2
 import numpy as np
