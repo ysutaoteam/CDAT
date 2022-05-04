@@ -12,13 +12,8 @@ import xlwt
 import openpyxl
 
 
-#HOG计算代码
 class Hog_descriptor():
-    '''
-    HOG描述符的实现
-    '''
-
-    def __init__(self, img, cell_size=8, bin_size=9):
+       def __init__(self, img, cell_size=8, bin_size=9):
         '''
         构造函数
             默认参数，一个block由2x2个cell组成，步长为1个cell大小
@@ -44,9 +39,7 @@ class Hog_descriptor():
         assert 180 % self.bin_size == 0, "bin_size should be divisible by 180"    #  %是取余数的运算
 
     def extract(self):
-        '''
-        计算图像的HOG描述符，以及HOG-image特征图
-        '''
+        
         height, width = self.img.shape
 
         '''
@@ -171,22 +164,12 @@ class Hog_descriptor():
                 将数据写入到表格中，形成形式背景，这样的话，上面的字典可能不需要了，只需要kk   min_angle  max_angle。
                 
                 '''
-                # worksheet.write(kk+(65*(m-1)),0,kk)
-                # worksheet.write(kk+(65*(m-1)),min_angle+1,'1')
-                # worksheet.write(kk+(65*(m-1)),max_angle+1,'1')
-
-                # # # worksheet.write('\n')
                 worksheet.write(kk+(64*(m-1)),0,kk)
                 worksheet.write(kk + (64 * (m - 1)),min_angle+1, 1)
                 worksheet.write(kk + (64 * (m - 1)),max_angle+1,1)
-        # workbook.save('F:/HOG-Picture/set-xingshibeijingshengcheng/jiankangren'+ "./" + filename+'.xls')
-        # workbook.save('F:/HOG-Picture/set-xingshibeijingshengcheng/youbingren' + "./" + filename + '.xls')
-        # workbook.save('F:/HOG-Picture/set-xingshibeijingshengcheng/test/healthyVoice-jiequ' + "./" + filename + '.xls')
+       
         workbook.save('E:/data/xingshibeijing/PD/1-FRFT-3' + "./" + filename + '.xls')
 
-        # print(d2)
-        # pd.DataFrame.from_dict(d2, orient='index', columns=['第一个bins', '第二个bins'])   #将字典转换成dataframe形式
-        # print(pd.DataFrame.from_dict(d2,orient='index', columns=['第一个bins', '第二个bins']))
         print('第'+str(m)+'个细胞的统计直方图：',orientation_centers)
         return orientation_centers
 
