@@ -89,12 +89,9 @@ class Graph_Matrix:
         if head not in self.vertices:
             self.add_vertex(head)
 
-        # for directory matrix
+     
         self.matrix[self.vertices.index(tail)][self.vertices.index(head)] = cost
-        # for non-directory matrix
-        # self.matrix[self.vertices.index(fromV)][self.vertices.index(toV)] = \
-        #   self.matrix[self.vertices.index(toV)][self.vertices.index(fromV)] = cost
-
+       
         self.edges_dict[(tail, head)] = cost
         self.edges_array.append((tail, head, cost))
         self.num_edges = len(self.edges_dict)
@@ -134,15 +131,6 @@ class Graph_Matrix:
 def create_undirected_matrix(my_graph,chuanshu):
     nodes = ['0°-20°', '20°-40°', '40°-60°', '60°-80°', '80°-100°', '100°-120°', '120°-140°', '140°-160°','160°-180°']
 
-    # matrix = [[2, 0, 0, 0, 5, 0, 0, 0, 0],  # a
-    #           [0, 1, 0, 0, 0, 0, 8, 0, 0],  # b
-    #           [0, 1, 3, 1, 0, 6, 0, 0, 0],  # c
-    #           [0, 0, 1, 4, 2, 0, 0, 3, 0],  # d
-    #           [0, 0, 0, 2, 4, 2, 0, 0, 0],  # e
-    #           [0, 0, 0, 0, 2, 5, 2, 0, 0],  # f
-    #           [0, 0, 2, 0, 0, 2, 4, 2, 0],  # g
-    #           [0, 3, 0, 0, 0, 0, 1, 2, 1],  # h
-    #           [0, 0, 5, 0, 0, 0, 0, 0, 1]]  # i
 
     matrix = chuanshu
     my_graph = Graph_Matrix(nodes,matrix)
