@@ -5,7 +5,7 @@ We provide the code for the CDAT feature extraction part. Please follow the inst
 The code is tested on 64 bit Windows 10. You should also install Python 3.6 before running our code.
 
 ## 1) Establish the formal context.py
-The input of this file is the spectrum. The spectrum is divided into several sub-regions after sliding windows. The pixel points in the sub-regions are used as objects and the quantized direction intervals as attributes. The output is a formal context table in the form of objects as columns and direction attributes as rows.
+The input of this file is the spectrogram image. The spectrogram images can be obtained through the "spectrogram.m" program in the folder "spectrogram". The spectrogram image is divided into several sub-regions after sliding windows. The pixel points in the sub-regions are used as objects and the quantized direction intervals as attributes. The output is a formal context table in the form of objects as columns and direction attributes as rows.
 
 ## 2) Format conversion.py
 The purpose of this file is to convert the formal context to mat format for further processing.
