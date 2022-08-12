@@ -51,7 +51,7 @@ class Graph_Matrix:
             if x >= self.num_vertices or x <= 0:
                 raise IndexError
         except IndexError:
-            print("节点下标出界")
+            print("the index of node is out of range")
 
     def isEmpty(self):
         if self.num_vertices == 0:
@@ -127,7 +127,7 @@ class Graph_Matrix:
 
 
 
-####由邻接矩阵生成属性拓扑图
+####  Generate attribute topology graph from adjacency matrix (由邻接矩阵生成属性拓扑图)
 def create_undirected_matrix(my_graph,chuanshu):
     nodes = ['0°-20°', '20°-40°', '40°-60°', '60°-80°', '80°-100°', '100°-120°', '120°-140°', '140°-160°','160°-180°']
 
@@ -140,22 +140,22 @@ def create_undirected_matrix(my_graph,chuanshu):
 
 
 def draw_undircted_graph(my_graph):
-    G = nx.Graph()  # 建立一个空的无向图G
+    G = nx.Graph()  # Create an empty undirected graph G (建立一个空的无向图G)
     for node in my_graph.vertices:
         G.add_node(str(node))
 
     for edge in my_graph.edges:
         G.add_edge(str(edge[0]), str(edge[1]), weight = str(edge[2]))   #, weight = str(edge[2])
 
-    # print("nodes:", G.nodes())  # 输出全部的节点：
-    # print("edges:", G.edges())  # 输出全部的边：
-    # print("number of edges:", G.number_of_edges())  # 输出边的数量：
+    # print("nodes:", G.nodes())                       # output all nodes (输出全部的节点)
+    # print("edges:", G.edges())                       # output all edges (输出全部的边)
+    # print("number of edges:", G.number_of_edges())   # output the number of edges (输出边的数量)
     # pos = spring_layout(G)
     # nx.draw(G, pos,with_labels=True)
     # plt.show()
     return G
 
-# 深度优先搜索(DFS)
+# Depth First Search (DFS)  (深度优先搜索(DFS))
 def dfs(graph, v):
     visited.append(v)
     stack.append(v)
@@ -167,19 +167,19 @@ def dfs(graph, v):
                 stack.append(neighbour)
 
 m =1
-# 创建workbook（其实就是excel，后来保存一下就行）
+# creat workbook (创建workbook)
 workbook = xlwt.Workbook(encoding='utf-8')
-# 创建表
+# creat table    (创建表)
 worksheet = workbook.add_sheet('sheet1')
 for path in os.listdir( 'E:/data/mat-xingshibeijing/0_class/-0.5'):  #0_class  F:/HOG-Picture/train/0_class  F:/HOG-Picture/CPPDD-dataset/SHIYAN/train/0_class
     data =scio.loadmat('E:/data/mat-xingshibeijing/0_class/-0.5' + "./" + path)
     #data_1 = scio.loadmat('E:/data/mat-xingshibeijing/1_class/3' + "./" + path)
 
-    #shuju_1= data_1['1']  #无病人
-    shuju= data['0']  #有病人
+    #shuju_1= data_1['1']  # healthy controls  (健康人)
+    shuju= data['0']       # patients with Parkinson (患者)
 
-    my_graph = Graph_Matrix()  #实例化一个类
-    for i in range(1,int(np.shape(shuju)[1]/9)+1):  #shuju:有病人  shuju_1：健康人
+    my_graph = Graph_Matrix()  # instantiate a class (实例化一个类)
+    for i in range(1,int(np.shape(shuju)[1]/9)+1):  # shuju: patients with Parkinson , shuju_1：healthy controls 
         created_graph,created_weight = create_undirected_matrix(my_graph,shuju[:,9*(i-1):9*i])
         matrix1 = draw_undircted_graph(created_graph)
 
@@ -196,6 +196,6 @@ for path in os.listdir( 'E:/data/mat-xingshibeijing/0_class/-0.5'):  #0_class  F
     m =m+1
 
 
-workbook.save('E:/data/liantongyu/PD/CPPDD中PD连通域数量--0.5.xls')
+workbook.save('E:/data/liantongyu/PD/Number of connected domains of PD in CPPDD--0.5.xls')
 
 
