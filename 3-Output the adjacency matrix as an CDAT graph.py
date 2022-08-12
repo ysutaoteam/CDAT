@@ -49,7 +49,7 @@ class Graph_Matrix:
             if x >= self.num_vertices or x <= 0:
                 raise IndexError
         except IndexError:
-            print("节点下标出界")
+            print("The index of nodes is out of range")
 
     def isEmpty(self):
         if self.num_vertices == 0:
@@ -128,7 +128,7 @@ class Graph_Matrix:
 
 
 
-####由邻接矩阵生成属性拓扑图
+#### Generate attribute topology graph from adjacency matrix (由邻接矩阵生成属性拓扑图)
 def create_undirected_matrix(my_graph,chuanshu):
     nodes = ['0°-20°', '20°-40°', '40°-60°', '60°-80°', '80°-100°', '100°-120°', '120°-140°', '140°-160°','160°-180°']
 
@@ -142,7 +142,7 @@ def create_undirected_matrix(my_graph,chuanshu):
 
 
 def draw_undircted_graph(my_graph,i,path):
-    G = nx.DiGraph()  # 建立一个空的有向图G
+    G = nx.DiGraph()  # Build an empty directed graph G (建立一个空的有向图G)
     for node in my_graph.vertices:
         G.add_node(str(node))
 
@@ -151,17 +151,17 @@ def draw_undircted_graph(my_graph,i,path):
     for edge in my_graph.edges:
         G.add_edge(str(edge[0]), str(edge[1]), weight = str(edge[2]))
 
-    print("nodes:", G.nodes())  # 输出全部的节点：
-    print("edges:", G.edges())  # 输出全部的边：
-    print("number of edges:", G.number_of_edges())  # 输出边的数量：
+    print("nodes:", G.nodes())                      # output all nodes (输出全部的节点)
+    print("edges:", G.edges())                      # output all edges (输出全部的边)
+    print("number of edges:", G.number_of_edges())  # output the number of edges (输出边的数量)
 
 
     pos = spring_layout(G)
-    nx.draw(G, pos, with_labels=True)# with_labels=True用于显示图中节点上的名称
+    nx.draw(G, pos, with_labels=True)      #  with_labels=True is used to display the names on the nodes in the graph (with_labels=True用于显示图中节点上的名称)
     # nx.draw(G, pos)
 
-    # 把文件写进本地文件中
-    #第一步先创建文件夹
+    #  write to local file (把文件写进本地文件中)
+    #  Create folder (创建文件夹)
     folder = os.path.exists("C:\\Users\\Administrator\\Desktop\\AT\\yu-1.1\\PD\\"  + path)
     shiwei = i // 3
     gewei = i % 3
@@ -186,7 +186,7 @@ def draw_undircted_graph(my_graph,i,path):
             plt.clf()
         if gewei == 0:
             plt.savefig("C:/Users/Administrator/Desktop/AT/yu-1.1/PD" + "/" + path + "/(" + str(shiwei)+")"+str(3)+".jpg")
-            plt.clf()#添加上这一行，画完第一个图后，重置一下
+            plt.clf()     # Add this line, and reset it after drawing the first picture (添加上这一行，画完第一个图后，重置)
 
 
 for path in os.listdir( 'C:/Users/Administrator/Desktop/xingshibeijing/yu-1.1/0_class'):  #0_class  1_class
@@ -196,13 +196,13 @@ for path in os.listdir( 'C:/Users/Administrator/Desktop/xingshibeijing/yu-1.1/0_
     # print(type(data))
     # print(data.keys())
 
-    #shuju_1= data_1['1']  #无病人
-    shuju= data['0']  #有病人
+    #shuju_1= data_1['1']  # healthy controls  (健康人)
+    shuju= data['0']  # patients with Parkinson (患者)
 
     # print(np.shape(shuju))
 
-    my_graph = Graph_Matrix()  #实例化一个类
-    for i in range(1,int(np.shape(shuju)[1]/9)+1):  #shuju:有病人  shuju_1：健康人
+    my_graph = Graph_Matrix()  #  instantiate a class (实例化一个类)
+    for i in range(1,int(np.shape(shuju)[1]/9)+1):           #   shuju: patients with Parkinson , shuju_1：healthy controls 
         print(i)
         created_graph,created_weight = create_undirected_matrix(my_graph,shuju[:,9*(i-1):9*i])
         draw_undircted_graph(created_graph,i,path)
