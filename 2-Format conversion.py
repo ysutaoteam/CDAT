@@ -11,16 +11,15 @@ import warnings
 warnings.simplefilter(action='ignore')
 
 
-#读取健康人文件夹下的形式背景set
+# read formal context under healthy people folder (读取健康人文件夹下的形式背景)
 
 for path in os.listdir('E:/data/xingshibeijing/HC/1-FRFT-0'):
-    data = pd.DataFrame(pd.read_excel(('E:/data/xingshibeijing/HC/1-FRFT-0'+"./"+path),header = 0,index_col=0))#读取数据,设置None可以生成一个字典，字典中的key值即为sheet名字，此时不用使用DataFram，会报错
-    # print(data)
-    # jiaankangpinjie_matrix=[]   #用于邻接矩阵拼接形状为(192, 9, 9)的语句
-    jiaankangpinjie_matrix = np.zeros((int(9), int(9)))  # #用于邻接矩阵拼接形状为(9，1728)的语句
+    data = pd.DataFrame(pd.read_excel(('E:/data/xingshibeijing/HC/1-FRFT-0'+"./"+path),header = 0,index_col=0))  # To read data, set None to generate a dictionary. The key value in the dictionary is the sheet name. (读取数据,设置None可以生成一个字典，字典中的key值即为sheet名字。)
+
+    jiaankangpinjie_matrix = np.zeros((int(9), int(9))) 
     for jj in range(1, 253):
         huachunag_data = data.iloc[0 + 64 * (jj - 1):64 + 64 * (jj - 1), 0:10]
-        result = huachunag_data.loc[huachunag_data['0°-20°'] == 1]  # 获取列名为0°-20°，内容为1的内容
+        result = huachunag_data.loc[huachunag_data['0°-20°'] == 1]  # Get the content whose column name is 0°-20° and the content is 1. (获取列名为0°-20°，内容为1的内容。)
         result2 = huachunag_data.loc[huachunag_data['20°-40°'] == 1]
         result3 = huachunag_data.loc[huachunag_data['40°-60°'] == 1]
         result4 = huachunag_data.loc[huachunag_data['60°-80°'] == 1]
@@ -40,37 +39,35 @@ for path in os.listdir('E:/data/xingshibeijing/HC/1-FRFT-0'):
                 else:
                     adjacency_matrix[i][j] = len(set(list[i].index).intersection(set(list[j].index)))
         
-        #if   else用于将邻接矩阵拼接成(9，1728)的语句
-
         
         if jj == 1:
             jiaankangpinjie_matrix = adjacency_matrix
         else:
-            # # 垂直拼接
+            # vertical stitching (垂直拼接)
             # jiaankangpinjie_matrix = np.vstack((jiaankangpinjie_matrix, adjacency_matrix))
-            # 横向拼接
+            # Horizontal stitching (横向拼接)
             jiaankangpinjie_matrix = np.hstack((jiaankangpinjie_matrix, adjacency_matrix))
-            # 或者（axis = 1 表示行,axis = 0 表示行列）
-            # jiaankangpinjie_matrix= np.concatenate((jiaankangpinjie_matrix, adjacency_matrix),axis=1)  #水平组合
+            # axis = 1 represents row, axis = 0 represents column(axis = 1 表示行,axis = 0 表示列)
+            # jiaankangpinjie_matrix= np.concatenate((jiaankangpinjie_matrix, adjacency_matrix),axis=1)  # horizontal combination (水平组合)
 
         # jiaankangpinjie_matrix.append(adjacency_matrix)   #.shape=(192, 9, 9)
     print(jiaankangpinjie_matrix)
     print(np.asarray(jiaankangpinjie_matrix).shape)
-    filename = 'E:/data/mat-xingshibeijing/1_class/0'+"./"+path+'.mat'  # 保存的文件名
-    scio.savemat(filename, {'1': jiaankangpinjie_matrix})  # 注意要以字典格式保存
+    filename = 'E:/data/mat-xingshibeijing/1_class/0'+"./"+path+'.mat'  # saved filename (保存的文件名)
+    scio.savemat(filename, {'1': jiaankangpinjie_matrix})  # save in dictionary format (注意要以字典格式保存)
 
 
 
-#读取患病人文件夹下的形式背景set
+# read formal context under healthy people folder (读取患病人文件夹下的形式背景)
 
 for path in os.listdir('E:/data/xingshibeijing/PD/1-FRFT-0'):
-    data = pd.DataFrame(pd.read_excel(('E:/data/xingshibeijing/PD/1-FRFT-0'+"./"+path),header = 0,index_col=0))#读取数据,设置None可以生成一个字典，字典中的key值即为sheet名字，此时不用使用DataFram，会报错
+    data = pd.DataFrame(pd.read_excel(('E:/data/xingshibeijing/PD/1-FRFT-0'+"./"+path),header = 0,index_col=0))
     # print(data)
-    # youbingpinjie_matrix=[]   #用于邻接矩阵拼接形状为(192, 9, 9)的语句
-    youbingpinjie_matrix = np.zeros((int(9), int(9)))  # #用于邻接矩阵拼接形状为(9，1728)的语句
+    # youbingpinjie_matrix=[]  
+    youbingpinjie_matrix = np.zeros((int(9), int(9)))  
     for jj in range(1, 253):
         huachunag_data = data.iloc[0 + 64 * (jj - 1):64 + 64 * (jj - 1), 0:10]
-        result = huachunag_data.loc[huachunag_data['0°-20°'] == 1]  # 获取列名为0°-20°，内容为1的内容
+        result = huachunag_data.loc[huachunag_data['0°-20°'] == 1]  
         result2 = huachunag_data.loc[huachunag_data['20°-40°'] == 1]
         result3 = huachunag_data.loc[huachunag_data['40°-60°'] == 1]
         result4 = huachunag_data.loc[huachunag_data['60°-80°'] == 1]
@@ -89,23 +86,21 @@ for path in os.listdir('E:/data/xingshibeijing/PD/1-FRFT-0'):
                     adjacency_matrix[i][j] = 0
                 else:
                     adjacency_matrix[i][j] = len(set(list[i].index).intersection(set(list[j].index)))
-        
-       # if   else用于将邻接矩阵拼接成(9，1728)的语句
 
        
         if jj == 1:
             youbingpinjie_matrix = adjacency_matrix
         else:
-            # # 垂直拼接
+
             # youbingpinjie_matrix = np.vstack((youbingpinjie_matrix, adjacency_matrix))
-            # 横向拼接
+
             youbingpinjie_matrix = np.hstack((youbingpinjie_matrix, adjacency_matrix))
-            # 或者（axis = 1 表示行,axis = 0 表示行列）
-            # youbingpinjie_matrix= np.concatenate((youbingpinjie_matrix, adjacency_matrix),axis=1)  #水平组合
+
+            # youbingpinjie_matrix= np.concatenate((youbingpinjie_matrix, adjacency_matrix),axis=1) 
 
         # youbingpinjie_matrix.append(adjacency_matrix)   #.shape=(192, 9, 9)
     print(youbingpinjie_matrix)
     print(np.asarray(youbingpinjie_matrix).shape)
-    filename = 'E:/data/mat-xingshibeijing/0_class/0' + "./" + path + '.mat'  # 保存的文件名
-    scio.savemat(filename, {'0': youbingpinjie_matrix})  # 注意要以字典格式保存
+    filename = 'E:/data/mat-xingshibeijing/0_class/0' + "./" + path + '.mat'  
+    scio.savemat(filename, {'0': youbingpinjie_matrix}) 
 
